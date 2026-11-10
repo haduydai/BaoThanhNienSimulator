@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchMultipleFeeds, fetchRssFeed, NewsArticle } from '../../services/rssService';
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { fetchMultipleFeeds, fetchRssFeed, type NewsArticle } from '../../services/rssService';
 
 interface NewsState {
     articles: NewsArticle[];
