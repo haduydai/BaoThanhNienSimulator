@@ -1,9 +1,3 @@
-// ============================================================
-// src/utils/decodeHTML.ts
-// [TASK 34 - Duy Đại]: Xây dựng module Giải mã HTML Entities
-// Hàm tiện ích giải mã toàn bộ HTML entities (ví dụ: &amp;, &quot;, &aacute;, &#7899;,...)
-// Sử dụng thẻ <textarea> ẩn trong trình duyệt theo chuẩn DOM API
-// ============================================================
 
 export const decodeHTML = (html: string): string => {
     if (!html) return '';
