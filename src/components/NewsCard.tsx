@@ -29,7 +29,25 @@ function formatDate(isoDate: string): string {
         return isoDate;
     }
 }
-// ── Full card variant ──────────────────────────────────────
+function CompactCard({ article }: { article: NewsArticle }) {
+    const title = decodeHTML(article.title);
+    return (
+        <Link
+            to={`/news/${encodeURIComponent(article.id)}`}
+            className="sidebar-news-item d-block text-decoration-none"
+        >
+            <div className="d-flex gap-2">
+                <img
+                    src={article.thumbnail}
+                    alt={title}
+                    onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
+                />
+                <span className="item-title">{title}</span>
+            </div>
+        </Link>
+    );
+}
+//  Full card variant
 export default function NewsCard({ article, compact = false }: NewsCardProps) {
     const dispatch = useAppDispatch();
     const isSaved  = useAppSelector(selectIsBookmarked(article.id));
