@@ -91,4 +91,3 @@ const newsSlice = createSlice({
 
 export const { setCurrentCategory, clearArticles } = newsSlice.actions;
 export default newsSlice.reducer;
-
