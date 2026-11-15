@@ -9,7 +9,7 @@ export const decodeHTML = (html: string): string => {
         txt.innerHTML = html;
         return txt.value;
     } catch {
-        // Fallback giải mã thủ công nếu chạy ngoài môi trường DOM
+        // Fallback(chạy ngoài môi trường DOM)
         return html
             .replace(/&amp;/g, '&')
             .replace(/&lt;/g, '<')

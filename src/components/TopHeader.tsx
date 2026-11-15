@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherByCity } from '../redux/slices/weatherSlice.ts';
+import { fetchWeatherByCity } from '../redux/weatherSlice.tsx';
 import type { AppDispatch, RootState } from "../redux/store";
 import { getWeatherIcon } from "../utils/weatherHelper.ts";
 
