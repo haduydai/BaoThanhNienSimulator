@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import weatherReducer from './slices/weatherSlice.ts';
+import weatherReducer from './weatherSlice.tsx';
 import newsReducer from './slices/newsSlice';
 import bookmarkReducer from './slices/bookmarkSlice';
 import themeReducer from './slices/themeSlice';
