@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherByCity } from '../redux/weatherSlice';
+import { fetchWeatherByCity } from '../redux/slices/weatherSlice.ts';
 import type { AppDispatch, RootState } from "../redux/store";
-import { getWeatherIcon } from "../utils/weatherHelper";
+import { getWeatherIcon } from "../utils/weatherHelper.ts";
 
 const POPULAR_CITIES = [
     { id: 'hcm', displayName: 'TP. Hồ Chí Minh', searchName: 'Ho Chi Minh City', country: 'Việt Nam' },
@@ -103,7 +103,7 @@ export default function TopHeader() {
                             </span>
 
                             <i
-                                className="fa-solid fa-chevron-down text-muted"
+                                className="fa-solid fa-chevron-down"
                                 style={{ fontSize: '11px',
                                     transition: 'transform 0.2s ease',
                                     transform: isOpenDropdown ? 'rotate(180deg)' : 'rotate(0deg)'}}
@@ -133,19 +133,19 @@ export default function TopHeader() {
                                         value={searchQuery}
                                         onChange={(e) => handleSearchCity(e.target.value)}
                                     />
-                                    <span className="input-group-text bg-light border-light-subtle text-muted">
+                                    <span className="input-group-text bg-light border-light-subtle text-dark">
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </span>
                                 </div>
                                 <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
                                     {isSearching && (
-                                        <div className="text-muted text-center py-2">
+                                        <div className="text-center py-2">
                                             Đang tìm kiếm...
                                         </div>
                                     )}
                                     {!isSearching && !searchQuery && (
                                         <>
-                                            <div className="text-muted px-2 py-1" style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                                            <div className="px-2 py-1" style={{ fontSize: '12px', fontWeight: 'bold' }}>
                                                 Thành phố phổ biến
                                             </div>
                                             {POPULAR_CITIES.map((city) => (
@@ -156,7 +156,7 @@ export default function TopHeader() {
                                                     style={{ cursor: 'pointer' }}
                                                 >
                                                     <div>{city.displayName}</div>
-                                                    <small className="text-muted">{city.country}</small>
+                                                    <small>{city.country}</small>
                                                 </div>
                                             ))}
                                         </>
@@ -169,13 +169,13 @@ export default function TopHeader() {
                                             style={{ cursor: 'pointer' }}
                                         >
                                             <div>{city.name}</div>
-                                            <small className="text-muted">
+                                            <small>
                                                 {[city.admin1, city.country].filter(Boolean).join(', ')}
                                             </small>
                                         </div>
                                     ))}
                                     {!isSearching && searchQuery && cities.length === 0 && (
-                                        <div className="text-muted text-center py-2">
+                                        <div className="text-center py-2">
                                             Không tìm thấy thành phố
                                         </div>
                                     )}

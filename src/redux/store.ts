@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import weatherReducer from './weatherSlice';
+import {type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import weatherReducer from './slices/weatherSlice.ts';
 import newsReducer from './slices/newsSlice';
 import bookmarkReducer from './slices/bookmarkSlice';
 import themeReducer from './slices/themeSlice';
+// import articlesReducer from '../features/articles/articlesSlice';
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         news: newsReducer,
         bookmark: bookmarkReducer,
         theme: themeReducer,
+        // articles: articlesReducer,
     },
 });
 

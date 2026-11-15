@@ -1,11 +1,8 @@
-import TopHeader from "./components/TopHeader.tsx";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./route/Router.tsx";
 
 function App() {
-  return (
-    <>
-        <TopHeader />
-    </>
-  )
+  return <RouterProvider router = {router}/>
 }
 
 export default App
