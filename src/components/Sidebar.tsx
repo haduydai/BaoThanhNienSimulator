@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../redux/store';
-import { fetchWeatherByCity } from '../redux/weatherSlice';
+import { fetchWeatherByCity } from '../redux/slices/weatherSlice';
 import { getWeatherIcon } from '../utils/weatherHelper';
 import { decodeHTML } from '../utils/decodeHTML';
 import { useEffect } from 'react';
@@ -89,3 +89,99 @@ function MostReadWidget() {
         </div>
     );
 }
+function WeatherWidget() {
+    const dispatch = useAppDispatch();
+    const { selectedCity, temp, condition, isDay, status } =
+        useAppSelector((s) => s.weather);
+
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchWeatherByCity('Ho Chi Minh City'));
+        }
+    }, [dispatch, status]);
+
+    const { icon, color } = getWeatherIcon(condition, isDay);
+
+    return (
+        <div className="sidebar-widget card border-0 shadow-sm mb-4">
+            <div className="widget-header">
+                <i className="fa-solid fa-cloud-sun me-2" />
+                THỜI TIẾT
+            </div>
+            <div className="card-body p-3 text-center">
+                {status === 'loading' ? (
+                    <div className="spinner-border spinner-border-sm text-danger" role="status" />
+                ) : (
+                    <>
+                        <i className={`fa-solid ${icon} ${color} mb-1`} style={{ fontSize: 42 }} />
+                        <div className="fw-bold fs-4 mt-1">
+                            {temp !== null ? `${temp}°C` : '--°C'}
+                        </div>
+                        <div className="text-muted small">{selectedCity || 'TP. Hồ Chí Minh'}</div>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function ExchangeWidget() {
+    const { rates, loading } = useExchangeRates();
+
+    return (
+        <div className="sidebar-widget card border-0 shadow-sm mb-4">
+            <div className="widget-header">
+                <i className="fa-solid fa-dollar-sign me-2" />
+                TỶ GIÁ NGOẠI TỆ
+            </div>
+            <div className="card-body p-3">
+                {loading ? (
+                    <div className="text-center">
+                        <div className="spinner-border spinner-border-sm text-danger" role="status" />
+                    </div>
+                ) : (
+                    <table className="table table-sm table-borderless mb-0" style={{ fontSize: '0.82rem' }}>
+                        <thead>
+                        <tr className="text-muted">
+                            <th>Ngoại tệ</th>
+                            <th className="text-end">VND</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {CURRENCIES.map(({ code, flag, name }) => (
+                            <tr key={code}>
+                                <td>
+                                    <span className="me-1">{flag}</span>
+                                    <span className="fw-semibold">{code}</span>
+                                    <small className="text-muted d-block" style={{ fontSize: '0.72rem' }}>
+                                        {name}
+                                    </small>
+                                </td>
+                                <td className="text-end fw-semibold text-danger">
+                                    {rates[code]
+                                        ? rates[code].toLocaleString('vi-VN')
+                                        : '---'}
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                )}
+                <div className="text-muted text-end" style={{ fontSize: '0.68rem', marginTop: 4 }}>
+                    Nguồn: open.er-api.com
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function Sidebar() {
+    return (
+        <aside>
+            <WeatherWidget />
+            <MostReadWidget />
+            <ExchangeWidget />
+        </aside>
+    );
+}
+
