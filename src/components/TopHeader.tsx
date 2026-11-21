@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherByCity } from '../redux/weatherSlice.tsx';
+import { fetchWeatherByCity } from '../redux/slices/weatherSlice.tsx';
 import type { AppDispatch, RootState } from "../redux/store";
 import { getWeatherIcon } from "../utils/weatherHelper.ts";
 
@@ -81,6 +81,9 @@ export default function TopHeader() {
 
     const weatherIcon = getWeatherIcon(condition, isDay);
 
+    const {socialLinks} = useSelector(
+        (state:RootState) => state.socials
+    );
     return (
         <div
             className="bg-light text-secondary py-2 border-bottom"
@@ -194,23 +197,25 @@ export default function TopHeader() {
                     <a href="#" className="text-secondary text-decoration-none">Liên hệ</a>
 
                 </div>
-
                 <div className="d-flex align-items-center gap-2 text-nowrap">
                     <span>Theo dõi báo trên</span>
-                    <a href="https://www.youtube.com/channel/UCIW9cGgoRuGJnky3K3tbzNg" target="_blank" rel="noreferrer" className="text-danger fs-5">
-                        <i className="fa-brands fa-youtube"></i>
-                    </a>
-                    <a href="https://www.facebook.com/thanhnien" target="_blank" rel="noreferrer" className="text-primary fs-5">
-                        <i className="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/baothanhnien.official" target="_blank" rel="noreferrer" className="text-dark fs-5">
-                        <i className="fa-brands fa-tiktok"></i>
-                    </a>
-                    <a href="https://zalo.me/2431025964363015388" target="_blank" rel="noreferrer" className="d-flex">
-                        <img src="https://thanhnien-static.mediacdn.vn/thanhnien.vn/image/icon_zalo_full_color.svg" width="20" height="20" alt="Zalo" />
-                    </a>
-                </div>
 
+                    {socialLinks.map((item) => (
+                        <a
+                            key={item.id}
+                            href={item.link}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.name}
+                                width="20"
+                                height="20"
+                            />
+                        </a>
+                    ))}
+                </div>
             </div>
 
             {status === 'failed' && (
