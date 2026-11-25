@@ -7,7 +7,7 @@ interface MegaMenuProps {
     onClose: () => void;
 }
 
-export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
+export default function MainHeaderMenu({ isOpen, onClose }: MegaMenuProps) {
     const { categories, utilities, quickLinks} = useSelector(
         (state: RootState) => state.categories
     );
