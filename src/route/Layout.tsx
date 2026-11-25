@@ -1,7 +1,7 @@
     import { Outlet } from "react-router-dom";
     import TopHeader from "../components/TopHeader";
     import MainHeader from "../components/MainHeader.tsx";
-    import MegaMenu from "../components/MegaMenu.tsx";
+    import MainHeaderMenu from "../components/MainHeaderMenu.tsx";
     import {useState} from "react";
     import NavBar from "../components/NavBar.tsx";
 
@@ -11,7 +11,7 @@
             <div className="bg-light min-vh-100">
                 <header className="sticky-top ">
                     {isOpenMenu ? (
-                        <MegaMenu isOpen={isOpenMenu} onClose={() => setIsOpenMenu(false)} />
+                        <MainHeaderMenu isOpen={isOpenMenu} onClose={() => setIsOpenMenu(false)} />
                     ) : (
                         <>
                             <TopHeader />

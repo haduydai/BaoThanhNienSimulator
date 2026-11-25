@@ -16,6 +16,7 @@ export interface NewsArticle {
 //12 chuyên mục chính thức Báo Thanh Niên
 export const RSS_FEEDS: Record<string, string> = {
     'trang-chu':  'https://thanhnien.vn/rss/home.rss',
+    'chinh-tri': 'https://thanhnien.vn/rss/chinh-tri.rss',
     'thoi-su':    'https://thanhnien.vn/rss/thoi-su.rss',
     'the-gioi':   'https://thanhnien.vn/rss/the-gioi.rss',
     'kinh-te':    'https://thanhnien.vn/rss/kinh-te.rss',
