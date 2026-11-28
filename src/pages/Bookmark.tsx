@@ -29,5 +29,48 @@ export default function Bookmark() {
         );
     }
 
+    // Có bài đã lưu
+    return (
+        <>
+            {/* Header */}
+            <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+                <div className="section-header mb-0">
+                    <i className="fa-solid fa-bookmark me-2" />
+                    Tin đã lưu
+                    <span className="badge bg-danger ms-2 fs-6">{bookmarks.length}</span>
+                </div>
+                <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={() => {
+                        if (window.confirm(`Xoá tất cả ${bookmarks.length} bài đã lưu?`)) {
+                            dispatch(clearAllBookmarks());
+                        }
+                    }}
+                >
+                    <i className="fa-solid fa-trash me-1" />
+                    Xoá tất cả
+                </button>
+            </div>
 
+            {/* Grid bài đã lưu */}
+            <div className="row g-3">
+                {bookmarks.map((article) => (
+                    <div key={article.id} className="col-12 col-sm-6 col-lg-4">
+                        {/* Wrapper để thêm nút xoá nổi trên NewsCard */}
+                        <div className="position-relative">
+                            <NewsCard article={article} />
+                            <button
+                                className="btn btn-sm btn-danger position-absolute"
+                                style={{ top: 8, right: 8, zIndex: 10, lineHeight: 1 }}
+                                title="Xoá khỏi danh sách đã lưu"
+                                onClick={() => dispatch(removeBookmark(article.id))}
+                            >
+                                <i className="fa-solid fa-xmark" />
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </>
+    );
 }
